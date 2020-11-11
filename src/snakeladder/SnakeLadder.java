@@ -16,46 +16,47 @@ public class SnakeLadder {
 	public static void main(String[] args) {
 		System.out.println("Welcome to Snake and Ladder game:\n");
 		System.out.println("Initial player position:"+start);
+		while (p1<=end) {
 		position();
 		diceroll();
 		option();
-		
+		}
 	}
 	private static void option() {
 		int num = randnum.nextInt(3);
+		 
 		if (num==1) {
 			System.out.println("Reached Ladder");
-			System.out.println(opt);
 			p1=p1+opt;
-			position();
+			//position();
 		}
 		else if (num==2) {
 			System.out.println("Snake Encountered");
-			System.out.println(opt);
+			
 			p1=p1-opt;
-			position();
+			//position();
 		}
 		else {
 			System.out.println("Same position");
-			//System.out.println(opt);
 			p1=p1;
-			position();
+			//position();
+		
 		}
-		
-		
 	}
 	private static void diceroll() {
 		
 		dice = randnum.nextInt(6)+1;
-		System.out.println("Rolling Dice......Dice Number :"+ dice);
+		System.out.println("Rolling Dice...:"+ dice);
 		p1=p1+dice;
 		opt=dice;
 		position();
 		
 	}
 	private static void position() {
-		
-		System.out.println("Updated Player position:"+ p1);
+		if (p1<0) {
+			p1=0;
+		}
+		System.out.println("---Updated Player position:"+ p1);
 		
 		
 	}
