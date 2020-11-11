@@ -16,7 +16,7 @@ public class SnakeLadder {
 	public static void main(String[] args) {
 		System.out.println("Welcome to Snake and Ladder game:\n");
 		System.out.println("Initial player position:"+start);
-		while (p1<=end) {
+		while (p1!=end) {
 		position();
 		diceroll();
 		option();
@@ -24,23 +24,43 @@ public class SnakeLadder {
 	}
 	private static void option() {
 		int num = randnum.nextInt(3);
+		switch (num) {
 		 
-		if (num==1) {
+		case 1: 
 			System.out.println("Reached Ladder");
 			p1=p1+opt;
-			//position();
-		}
-		else if (num==2) {
+			if (p1>100) {
+				System.out.println("Exceeeding 100");
+				p1=p1-dice;
+			}
+				else if (p1==100) {
+				System.out.println("Reached 100");
+				break;
+			}
+			break;
+		
+		
+		case 2: 
 			System.out.println("Snake Encountered");
-			
 			p1=p1-opt;
-			//position();
-		}
-		else {
-			System.out.println("Same position");
-			p1=p1;
+			if (p1>100) {
+				System.out.println("Exceeeding 100");
+				p1=p1-dice;
+			}
+			else if (p1==100) {
+				System.out.println("Reached 100");
+				break;
+			}
+			break;
 			//position();
 		
+		case 0: 
+			System.out.println("Same position");
+			p1=p1;
+			
+			break;
+		
+	
 		}
 	}
 	private static void diceroll() {
@@ -49,12 +69,20 @@ public class SnakeLadder {
 		System.out.println("Rolling Dice...:"+ dice);
 		p1=p1+dice;
 		opt=dice;
+		if (p1>100) {
+			System.out.println("Exceeeding 100");
+			p1=p1-dice;
+		}
 		position();
 		
 	}
 	private static void position() {
 		if (p1<0) {
 			p1=0;
+		}
+		else if (p1==100) {
+			System.out.println("Reached winning position:"+ p1);
+			System.exit(0);
 		}
 		System.out.println("---Updated Player position:"+ p1);
 		
