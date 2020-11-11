@@ -7,6 +7,7 @@ public class SnakeLadder {
 	static int p1=0;
 	static int dice=0;
 	static int opt=0;
+	static int count=0;
 	static final int start=0;
 	static final int end=100;
 	static Random randnum = new Random();
@@ -21,6 +22,7 @@ public class SnakeLadder {
 		diceroll();
 		option();
 		}
+		
 	}
 	private static void option() {
 		int num = randnum.nextInt(3);
@@ -67,8 +69,11 @@ public class SnakeLadder {
 		
 		dice = randnum.nextInt(6)+1;
 		System.out.println("Rolling Dice...:"+ dice);
+		count++;
+		
 		p1=p1+dice;
 		opt=dice;
+		
 		if (p1>100) {
 			System.out.println("Exceeeding 100");
 			p1=p1-dice;
@@ -82,6 +87,7 @@ public class SnakeLadder {
 		}
 		else if (p1==100) {
 			System.out.println("Reached winning position:"+ p1);
+			System.out.println("Total number of times die rolled:"+count);
 			System.exit(0);
 		}
 		System.out.println("---Updated Player position:"+ p1);
