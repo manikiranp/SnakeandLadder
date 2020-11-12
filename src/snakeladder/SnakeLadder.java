@@ -5,7 +5,7 @@ import java.util.Random;
 public class SnakeLadder {
 	
 	static int p1=0, p2=0;
-	static int dice=0;
+	static int dice=0;;
 	static int opt=0;
 	static int k=0;
 	
@@ -24,32 +24,32 @@ public class SnakeLadder {
 		if (current==-1) {
 			player=p1;
 			System.out.println("Player1 rolling die");
+			diceroll();
+			option(dice);
 			p1=calcplayerpos(player,  dice, k);
 			position(current,player);
 		}
 		else {
 			player=p2;
 			System.out.println("Player2 rolling die");
+			diceroll();
+			option(dice);
 			p2=calcplayerpos(player, dice, k);
 			position(current,player);
 		}
 		current=-current;
 		}
 			
-		//while (p1!=end) {
-//		position();
-//		diceroll();
-//		option();
-//		}
+	
 		
 	}
 	private static int option(int dice) {
+		
 		int num = randnum.nextInt(3);
 		switch (num) {
-		 
 		case 1: 
 			System.out.println("Reached Ladder");
-//			p1=p1+opt;
+
 			k=dice;
 			if (p1>100) {
 				System.out.println("Exceeeding 100");
@@ -63,7 +63,7 @@ public class SnakeLadder {
 
 		case 2: 
 			System.out.println("Snake Encountered");
-//			p1=p1-opt;
+
 			k=-dice;
 			if (p1>100) {
 				System.out.println("Exceeeding 100");
@@ -71,89 +71,65 @@ public class SnakeLadder {
 			}
 			else if (p1==100) {
 				System.out.println("Reached 100");
-				break;
+				
 			}
 			break;
-			//position();
+			
 		
 		case 0: 
 			System.out.println("Same position");
-//			p1=p1;
+
 			k=0;
 			break;
 		}
 		return k;
 	}
-	private static  int diceroll() {
+	private static int diceroll() {
+		dice=0;
 		dice = randnum.nextInt(6)+1;
 		System.out.println("Rolling Dice...:"+ dice);
 		count++;
-		//p1=p1+dice;
-		//opt=dice;
+		
 		return dice;
-//		if (p1>100) {
-//			System.out.println("Exceeeding 100");
-//			p1=p1-dice;
-//		}
-//		position();
+
 		
 	}
 	private static void position(int current,int player) {
 		
 		if (current<0) {
-			if (player==100) {
-				System.out.println("Reached winning position:"+ p1);
-				System.out.println("Total number of times die rolled:"+count);
-				System.exit(0);
-			}
 			System.out.println("---Updated Player1 position:"+p1);
 		}
 		else {
-			if (player==100) {
-				System.out.println("Reached winning position:"+ p2);
-				System.out.println("Total number of times die rolled:"+count);
-				System.exit(0);
-			}
 			System.out.println("---Updated Player2 position:"+p2);
 		}
-		
-//		if (p1<0) {
-//			p1=0;
-//		}
-//		else if (p1==100) {
-//			System.out.println("Reached winning position:"+ p1);
-//			System.out.println("Total number of times die rolled:"+count);
-//			System.exit(0);
-//		}
-//		System.out.println("---Updated Player1 position:"+ p1);
-//		///
-//		if (p2<0) {
-//			p2=0;
-//		}
-//		else if (p2==100) {
-//			System.out.println("Reached winning position:"+ p2);
-//			System.out.println("Total number of times die rolled:"+count);
-//			System.exit(0);
-//		}
-//		System.out.println("---Updated Player2 position:"+ p2);	
-		
+		if (p1==100 || p2==100) {
+			System.out.println("Reached winning position:"+ end);
+			System.out.println("Total number of times die rolled:"+count);
+			System.exit(0);
+		}		
 	}
-	////
+	
 	private static int calcplayerpos(int player, int dice, int k) {
-		diceroll();
-		option(dice);
-		player = player +dice+k;
+//		diceroll();
+//		option(dice);
+		player = player+dice+k;
+		System.out.println(player+"-"+dice+"-"+k);
 		if (player>end) {
-			player = player - dice;
-			return player;
+			player = player - dice-k;
+				
 		}
 		if (player<0) {
-				player=0;
-				return player;
+			player=0;
+			
 			}
-		if (player==100) {
-			System.out.println(player+"player won");
-			return player;
+		if (player==100 && player==p1) {
+			System.out.println("Player1 has won***:");
+			
+		}
+		if (player==100 && player==p2) {
+			System.out.println("Player2 has won***:");
+			
+		
 		}
 		return player;
 		
